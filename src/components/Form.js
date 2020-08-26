@@ -20,8 +20,15 @@ const Button = styled.input`
   }
 `;
 const Form = () => {
+  const COINS = [
+    { code: "USD", name: "United States Dolar" },
+    { code: "MXN", name: "Peso Mexicano" },
+    { code: "EUR", name: "Euro" },
+    { code: "GBP", name: "Libra Esterlina " },
+  ];
+
   //Utilizamos useCoin
-  const [coin, Select, setCoin] = useCoin();
+  const [coin, Select, setCoin] = useCoin("Select coin", "", COINS);
 
   return (
     <form>

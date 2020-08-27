@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
 import image from "./cryptomonedas.png";
 import styled from "@emotion/styled";
@@ -37,8 +37,13 @@ const Heading = styled.h1`
 `;
 
 function App() {
-  //https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD
-  //https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD,EUR
+  const [coin, setCoin] = useState("");
+  const [cryptocurrency, setCryptocurrency] = useState("");
+
+  useEffect(() => {
+    //Evitamos la ejecución la primera vez
+    if (coin === "") return;
+  }, [coin, cryptocurrency]);
   return (
     <Container>
       <div>
@@ -46,7 +51,7 @@ function App() {
       </div>
       <div>
         <Heading>Quote currencies instantly</Heading>
-        <Form />
+        <Form setCryptocurrency={setCryptocurrency} setCoin={setCoin} />
       </div>
     </Container>
   );

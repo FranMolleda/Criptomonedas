@@ -22,7 +22,7 @@ const Button = styled.input`
     cursor: pointer;
   }
 `;
-const Form = () => {
+const Form = ({ setCoin, setCryptocurrency }) => {
   //State del listado de criptomonedas
   const [cryptolist, setCryptolist] = useState([]);
   const [error, setError] = useState(false);
@@ -63,6 +63,8 @@ const Form = () => {
       return;
     }
     setError(false);
+    setCryptocurrency(cryptoCurrency);
+    setCoin(coin);
   };
 
   return (

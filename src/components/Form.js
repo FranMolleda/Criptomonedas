@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import Error from "../components/Error";
 import useCoin from "../hooks/useCoin";
 import useCryptocurrency from "../hooks/useCryptocurrency";
 import Axios from "axios";
@@ -24,6 +25,7 @@ const Button = styled.input`
 const Form = () => {
   //State del listado de criptomonedas
   const [cryptolist, setCryptolist] = useState([]);
+  const [error, setError] = useState(false);
 
   const COINS = [
     { code: "USD", name: "United States Dolar" },
@@ -53,8 +55,19 @@ const Form = () => {
     consultApi();
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (cryptoCurrency === "" || coin === "") {
+      setError(true);
+      return;
+    }
+    setError(false);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+      {error ? <Error message="Todos los campos son obligatorios" /> : null}
       <Select />
 
       <SelectCrypto />

@@ -1,5 +1,25 @@
-import React from "react";
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
+import styled from "@emotion/styled";
+
+const Label = styled.label`
+  font-family: "bebas neue", cursive;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2.4rem;
+  margin-top: 2rem;
+  display: block;
+`;
+
+const Selection = styled.select`
+  width: 100%;
+  display: block;
+  padding: 1rem;
+  --webkit-appearance: none;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
+`;
 
 //A la función useCoin le pasamos como parametros (y otros nombres) lo que estamos pasando en Form:
 // const COINS = [
@@ -16,15 +36,15 @@ const useCoin = (label, stateInitial, options) => {
 
   const Select = () => (
     <Fragment>
-      <label htmlFor="">{label}</label>
-      <select onChange={(e) => setState(e.target.value)} value={state}>
+      <Label htmlFor="">{label}</Label>
+      <Selection onChange={(e) => setState(e.target.value)} value={state}>
         <option value="">-- Select --</option>
         {options.map((option) => (
           <option key={option.code} value={option.code}>
             {option.name}
           </option>
         ))}
-      </select>
+      </Selection>
     </Fragment>
   );
   //Retornar state

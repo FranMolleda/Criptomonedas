@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
 import image from "./cryptomonedas.png";
 import styled from "@emotion/styled";
-
+import Axios from "axios";
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -41,8 +41,14 @@ function App() {
   const [cryptocurrency, setCryptocurrency] = useState("");
 
   useEffect(() => {
-    //Evitamos la ejecución la primera vez
-    if (coin === "") return;
+    const ApiCalculate = async () => {
+      //Evitamos la ejecución la primera vez
+      if (coin === "") return;
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptocurrency}&tsyms=${coin}`;
+      const response = await Axios.get(url);
+      console.log(response.data.DISPLAY[cryptocurrency][coin]);
+    };
+    ApiCalculate();
   }, [coin, cryptocurrency]);
   return (
     <Container>

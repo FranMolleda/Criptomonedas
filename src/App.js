@@ -4,6 +4,7 @@ import image from "./cryptomonedas.png";
 import styled from "@emotion/styled";
 import Axios from "axios";
 import Quotation from "./components/Quotation";
+import Spinner from "./components/Spinner";
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -41,6 +42,7 @@ function App() {
   const [coin, setCoin] = useState("");
   const [cryptocurrency, setCryptocurrency] = useState("");
   const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const ApiCalculate = async () => {
@@ -48,10 +50,19 @@ function App() {
       if (coin === "") return;
       const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptocurrency}&tsyms=${coin}`;
       const response = await Axios.get(url);
-      setResult(response.data.DISPLAY[cryptocurrency][coin]);
+      //Mostrar el Spinner
+      setLoading(true);
+
+      //ocultar el spinner y mostrar el resultado
+      setTimeout(() => {
+        setLoading(false);
+        setResult(response.data.DISPLAY[cryptocurrency][coin]);
+      }, 3000);
     };
     ApiCalculate();
   }, [coin, cryptocurrency]);
+
+  const component = loading ? <Spinner /> : <Quotation result={result} />;
   return (
     <Container>
       <div>
@@ -60,7 +71,7 @@ function App() {
       <div>
         <Heading>Quote currencies instantly</Heading>
         <Form setCryptocurrency={setCryptocurrency} setCoin={setCoin} />
-        <Quotation result={result} />
+        {component}
       </div>
     </Container>
   );

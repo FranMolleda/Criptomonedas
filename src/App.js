@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React, { useState, useEffect } from "react";
+import Form from "./components/Form";
 import image from "./cryptomonedas.png";
-
+import styled from "@emotion/styled";
+import Axios from "axios";
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -36,15 +37,27 @@ const Heading = styled.h1`
 `;
 
 function App() {
-  //https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD
-  //https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD,EUR
+  const [coin, setCoin] = useState("");
+  const [cryptocurrency, setCryptocurrency] = useState("");
+
+  useEffect(() => {
+    const ApiCalculate = async () => {
+      //Evitamos la ejecución la primera vez
+      if (coin === "") return;
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptocurrency}&tsyms=${coin}`;
+      const response = await Axios.get(url);
+      console.log(response.data.DISPLAY[cryptocurrency][coin]);
+    };
+    ApiCalculate();
+  }, [coin, cryptocurrency]);
   return (
     <Container>
       <div>
         <Image src={image} alt="crypto img" />
       </div>
       <div>
-        <Heading>Cotiza Criptomonedas al Instante</Heading>
+        <Heading>Quote currencies instantly</Heading>
+        <Form setCryptocurrency={setCryptocurrency} setCoin={setCoin} />
       </div>
     </Container>
   );

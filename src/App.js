@@ -55,6 +55,7 @@ function App() {
       <div>
         <Image src={image} alt="crypto img" />
       </div>
+      <div></div>
       <div>
         <Heading>Quote currencies instantly</Heading>
         <Form setCryptocurrency={setCryptocurrency} setCoin={setCoin} />

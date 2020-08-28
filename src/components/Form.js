@@ -28,10 +28,10 @@ const Form = ({ setCoin, setCryptocurrency }) => {
   const [error, setError] = useState(false);
 
   const COINS = [
-    { code: "USD", name: "United States Dolar" },
-    { code: "MXN", name: "Peso Mexicano" },
     { code: "EUR", name: "Euro" },
-    { code: "GBP", name: "Libra Esterlina " },
+    { code: "USD", name: "United States Dolar" },
+    { code: "GBP", name: "Pound Sterling" },
+    { code: "MXN", name: "Mexican Peso" },
   ];
 
   //Utilizamos useCoin

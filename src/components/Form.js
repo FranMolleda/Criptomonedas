@@ -4,6 +4,7 @@ import Error from "../components/Error";
 import useCoin from "../hooks/useCoin";
 import useCryptocurrency from "../hooks/useCryptocurrency";
 import Axios from "axios";
+import PropTypes from "prop-types";
 
 const Button = styled.input`
   margin-top: 20 px;
@@ -77,6 +78,11 @@ const Form = ({ setCoin, setCryptocurrency }) => {
       <Button type="submit" value="Calculate" />
     </form>
   );
+};
+
+Form.propTypes = {
+  setCryptocurrency: PropTypes.func.isRequired,
+  setCoin: PropTypes.func.isRequired,
 };
 
 export default Form;

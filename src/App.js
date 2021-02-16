@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import Axios from "axios";
 import Quotation from "./components/Quotation";
 import Spinner from "./components/Spinner";
+
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
@@ -47,6 +48,7 @@ function App() {
   useEffect(() => {
     const ApiCalculate = async () => {
       //Evitamos la ejecución la primera vez
+      console.log(coin);
       if (coin === "") return;
       const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptocurrency}&tsyms=${coin}`;
       const response = await Axios.get(url);

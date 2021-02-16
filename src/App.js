@@ -23,7 +23,7 @@ const Image = styled.img`
 
 const Heading = styled.h1`
   font-family: "Bebas Neue", cursive;
-  color: #fdfcfc;
+  color: #f70606;
   text-align: left;
   font-weight: 700;
   font-size: 50px;
